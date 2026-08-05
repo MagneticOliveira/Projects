@@ -17,7 +17,6 @@ public class Service {
     public static Object noUser(){
         Map<String, String> user = new HashMap<>();
         user.put("mensagem", "usuário ou senha incorretos");
-        System.out.println("oi");
 
         return user;
     }
@@ -25,9 +24,6 @@ public class Service {
     public ResponseEntity<?> cadastro(
             @RequestParam String email,
             @RequestParam String password) {
-
-        System.out.println("Email: " + email);
-        System.out.println("Senha: " + password);
 
         try {
             String sql = """
@@ -44,14 +40,22 @@ public class Service {
 
             return ResponseEntity.ok(jdbcTemplate.queryForMap(sql, email, password));
         }catch(Exception e){
-            e.printStackTrace();   // IMPORTANTE
-
-            throw e;               // IMPORTANTE
+            return ResponseEntity.ok(noUser());
         }
     }
 
     @GetMapping("/teste")
-    public String teste() {
-        return "Funcionando";
+    public ResponseEntity<?> Batata(
+            //@RequestParam String email //Vira @GetMapping(/teste?email=teste@gmail.com)
+    ){
+        //com @ResquestParam para ?
+        String sql = """
+                SELECT email FROM users WHERE email = ?
+                """;
+
+        String sql2 = """
+                SELECT email FROM users WHERE id = 2
+                """;
+        return ResponseEntity.ok(jdbcTemplate.queryForObject(sql2, String.class));//, email));
     }
 }
