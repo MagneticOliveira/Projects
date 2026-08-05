@@ -46,17 +46,7 @@ public class Service {
     }
 
     @GetMapping("/teste")
-    public ResponseEntity<?> Batata(
-            //@RequestParam String email //Vira @GetMapping(/teste?email=teste@gmail.com)
-    ){
-        //com @ResquestParam para ?
-        String sql = """
-                SELECT email FROM users WHERE email = ?
-                """;
-
-        String sql2 = """
-                SELECT email FROM users WHERE id = 2
-                """;
-        return ResponseEntity.ok(jdbcTemplate.queryForObject(sql2, String.class));//, email));
+    public String teste() {
+        return "Funcionando";
     }
 }
