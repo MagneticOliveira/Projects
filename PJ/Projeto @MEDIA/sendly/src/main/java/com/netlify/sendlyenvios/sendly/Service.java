@@ -26,6 +26,9 @@ public class Service {
             @RequestParam String email,
             @RequestParam String password) {
 
+        System.out.println("Email: " + email);
+        System.out.println("Senha: " + password);
+
         try {
             String sql = """
                     SELECT id, email FROM users WHERE email = ? AND password = ?
