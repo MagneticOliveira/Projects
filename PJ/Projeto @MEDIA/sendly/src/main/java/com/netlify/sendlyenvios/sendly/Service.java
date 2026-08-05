@@ -44,7 +44,9 @@ public class Service {
 
             return ResponseEntity.ok(jdbcTemplate.queryForMap(sql, email, password));
         }catch(Exception e){
-            return ResponseEntity.ok(noUser());
+            e.printStackTrace();   // IMPORTANTE
+
+            throw e;               // IMPORTANTE
         }
     }
 
