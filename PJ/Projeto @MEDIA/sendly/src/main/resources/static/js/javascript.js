@@ -86,10 +86,13 @@ form.addEventListener('submit', async (e) => {
     //h1.innerHTML = data.email;
 
     //Se Recebido ou Não, acontecem:
-
-
+    
     if(data.id){
-        window.location.href = './menuprincipal.html'
+        if(window.innerWidth >= 1200){
+            window.location.href = './menuprincipalDev.html'
+        }else{
+            window.location.href = './menuprincipal.html'
+        }
     }else{
         p.forEach(noLogin => {
             noLogin.innerHTML = data.mensagem;
