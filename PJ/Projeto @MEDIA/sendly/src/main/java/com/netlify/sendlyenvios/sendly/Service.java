@@ -17,7 +17,6 @@ public class Service {
     public static Object noUser(){
         Map<String, String> user = new HashMap<>();
         user.put("mensagem", "usuário ou senha incorretos");
-        System.out.println("OK");
 
         return user;
     }
@@ -26,26 +25,13 @@ public class Service {
             @RequestParam String email,
             @RequestParam String password) {
 
-        System.out.println("EMAIL RECEBIDO: " + email);
-        System.out.println("PASSWORD RECEBIDO: " + password);
-
         try {
-
             String sql = """
-                SELECT id, email
-                FROM users
-                WHERE email = ? AND password = ?
-                """;
+                    SELECT id, email FROM users WHERE email = ? AND password = ?
+                    """;
 
-            Map<String, Object> resultado =
-                    jdbcTemplate.queryForMap(sql, email, password);
-
-            System.out.println("RESULTADO: " + resultado);
-
-            return ResponseEntity.ok(resultado);
-
-        } catch(Exception e){
-
+            return ResponseEntity.ok(jdbcTemplate.queryForMap(sql, email, password));
+        }catch(Exception e){
             e.printStackTrace();
 
             return ResponseEntity.internalServerError().body(

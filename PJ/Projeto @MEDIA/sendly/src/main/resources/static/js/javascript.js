@@ -84,6 +84,10 @@ form.addEventListener('submit', async (e) => {
 
     //Utilização do retorno POST, inutil mas didático
     //h1.innerHTML = data.email;
+    //Outra Utilização do retorno POST, inutil mas didático
+    //data = await data.json();
+    //console.log("DATA COMPLETA:", data);
+    //console.log("DATA.ID:", data.id);
 
     //Se Recebido ou Não, acontecem:
     
