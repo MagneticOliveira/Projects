@@ -8,7 +8,15 @@
     box-sizing: border-box;
 }
 
+footer, header, main{
+    background-color: white;
+}
+
 body{
+    background:
+    linear-gradient(rgba(255,255,255,0.49), rgba(255,255,255,0.9)),
+    url("https://images.unsplash.com/photo-1663517768994-a65e6ab3a40a?fm=jpg&q=60&w=3000&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTd8fGZ1bmRvcyUyMHByZXRvc3xlbnwwfHwwfHx8MA%3D%3D");
+
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -24,7 +32,6 @@ header{
     width: 100%;
     border-bottom: 1px solid black;
     padding-top: 0.68rem;
-    margin-bottom: 6.37rem;
     padding-bottom: 0.68rem;
     padding-inline: 1.5rem;
 }
@@ -45,6 +52,13 @@ header div{
 }
 
 img{
+    align-self: center;
+    border-radius: 50%;
+    height: auto;
+    max-width:20%;
+}
+
+#entregadorIcon{
     border-radius: 50%;
     height: auto;
     max-width:20%;
@@ -56,12 +70,35 @@ header img{
 }
 
 header section p{
-    font-size: 0.7rem;
+    font-size: 1.0rem;
 }
 
 main{
+    display: flex;
+    justify-content: space-between;
+    margin: 6.37rem 0 6.37rem 0;
+    padding: 3rem;
     height: 100vh;
-    max-width: 75rem;
+    width: 100dvw;
+}
+
+#paragrafoHero{
+    width: 33.33%;
+}
+
+#imagemHero{
+    display: flex;
+    WIDTH: 33.3%;
+    align-self: center;
+    justify-content: center;
+}
+
+img[src="imgs/icon_box.png"][alt="boxHero"]{
+    height: auto;
+    max-width:35rem;
+    width: 35dvw;
+    background-color: none;
+    animation: animationu 6s infinite repeat ease-in-out;
 }
 
 button{
@@ -73,16 +110,24 @@ button{
     cursor: pointer;
 }
 
-#buttonsCima button{
+#buttonsHero{
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    width: 33.33%;
+}
+
+#buttonsHero button{
     font-family: 'Inter', sans-serif;
     background-color: #000000;
     color: rgba(255, 255, 255, 0.8 );
     font-weight: 400;
 }
 
-button:nth-last-child{
+#buttonsHero button:nth-child(3){
     background-color: #B3B3B3;
     font-family: 'Inter', sans-serif;
+    margin-top: 3rem;
     font-weight: 700;
     border: none;
     color: white;
@@ -92,9 +137,13 @@ footer{
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
-    margin-top: 3.56rem;
     border-top: 1px solid black;
     padding: 1.31rem;
+    width: 100%;
+}
+
+label:has(a){
+    background-color: red;
 }
 
 footer div{
@@ -112,7 +161,7 @@ h2{
     text-transform: uppercase;
     font-family: 'Inter', sans-serif;
     font-weight: 700;
-    font-size: 0.7rem;
+    font-size: 1rem;
     text-align: left;
     margin-bottom: 0.4rem;
 }
@@ -129,6 +178,13 @@ footer section img{
 }
 
 footer section p{
-    font-size: 0.5rem;
+    font-size: 0.7rem;
     width: 100%;
+}
+
+
+@keyframes animationu{
+0%      {transform: translateY(0);}
+50%     {transform: translateY(16rem);}
+100%    {transform: translateY(0);}
 }

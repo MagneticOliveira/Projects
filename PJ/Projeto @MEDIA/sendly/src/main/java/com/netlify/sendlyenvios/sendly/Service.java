@@ -17,6 +17,7 @@ public class Service {
     public static Object noUser(){
         Map<String, String> user = new HashMap<>();
         user.put("mensagem", "usuário ou senha incorretos");
+        System.out.println("OK");
 
         return user;
     }
@@ -30,14 +31,6 @@ public class Service {
                     SELECT id, email FROM users WHERE email = ? AND password = ?
                     """;
 
-//        Another Form to return
-//        Map<String, String> data = new HashMap<>();
-//
-//        data.put("email", email);
-//        data.put("senha", password);
-//
-//        return ResponseEntity.ok(data);
-
             return ResponseEntity.ok(jdbcTemplate.queryForMap(sql, email, password));
         }catch(Exception e){
             return ResponseEntity.ok(noUser());
@@ -46,9 +39,7 @@ public class Service {
 
     @GetMapping("/teste")
     public ResponseEntity<?> Batata(
-            //@RequestParam String email //Vira @GetMapping(/teste?email=teste@gmail.com)
     ){
-        //com @ResquestParam para ?
         String sql = """
                 SELECT email FROM users WHERE email = ?
                 """;
