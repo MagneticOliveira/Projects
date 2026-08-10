@@ -32,11 +32,7 @@ public class Service {
 
             return ResponseEntity.ok(jdbcTemplate.queryForMap(sql, email, password));
         }catch(Exception e){
-            e.printStackTrace();
-
-            return ResponseEntity.internalServerError().body(
-                    Map.of("erro", e.getMessage())
-            );
+            return ResponseEntity.ok(noUser());
         }
     }
 
