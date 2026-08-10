@@ -80,7 +80,11 @@ form.addEventListener('submit', async (e) => {
     //Passo 3
     //TRATAR API
 
-    data = await data.json();
+   data = await data.json();
+   
+   console.log("RETORNO DO BACKEND:", data);
+   console.log("ID:", data.id);
+   console.log("MENSAGEM:", data.mensagem);
 
     //Utilização do retorno POST, inutil mas didático
     //h1.innerHTML = data.email;
