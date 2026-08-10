@@ -26,14 +26,31 @@ public class Service {
             @RequestParam String email,
             @RequestParam String password) {
 
-        try {
-            String sql = """
-                    SELECT id, email FROM users WHERE email = ? AND password = ?
-                    """;
+        System.out.println("EMAIL RECEBIDO: " + email);
+        System.out.println("PASSWORD RECEBIDO: " + password);
 
-            return ResponseEntity.ok(jdbcTemplate.queryForMap(sql, email, password));
-        }catch(Exception e){
-            return ResponseEntity.ok(noUser());
+        try {
+
+            String sql = """
+                SELECT id, email
+                FROM users
+                WHERE email = ? AND password = ?
+                """;
+
+            Map<String, Object> resultado =
+                    jdbcTemplate.queryForMap(sql, email, password);
+
+            System.out.println("RESULTADO: " + resultado);
+
+            return ResponseEntity.ok(resultado);
+
+        } catch(Exception e){
+
+            e.printStackTrace();
+
+            return ResponseEntity.internalServerError().body(
+                    Map.of("erro", e.getMessage())
+            );
         }
     }
 
