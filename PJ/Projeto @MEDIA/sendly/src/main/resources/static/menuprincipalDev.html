@@ -12,11 +12,11 @@
         <a href="#">ENTREGAs</a>
         <div>
             <section>
-                <p>Matheus Batista de Oliveira</p>
-                <p>Av. Paulo Guilguer Reimberg</p>
-                <p>Entregas Ativas 3</p>
+                <p id="name">Matheus Batista de Oliveira</p>
+                <p id="endereco">Av. Paulo Guilguer Reimberg</p>
+                <div id="entregasAtivasDiv"><p>Entregas Ativas:&nbsp<p id="entregasAtivas">0</p></p></div>
             </section>
-            <img src="./imgs/icon_entregador.png" alt="">
+            <img id="iconPerfil" src="./imgs/icon_entregador.png" alt="">
         </div>
     </header>
 
@@ -46,15 +46,15 @@
             <p>© 2026 Sendly. Todos os direitos reservados.</p>
         </section>
         <section id="status">
-            <section>
+            <section><!-- ER é entrega recente -->
                     <h2>entrega recente</h2>
-                    <div><p id="statusPedido">A Caminho</p><p id="statusTempo">3 dias</p></div>
+                    <div><p id="statusPedido">A Caminho</p><div><p id="statusTempo">3 <div>&nbsp</div><p>dias</p></p></div></div>
                     <p id="statusEndereco">Av.Paulo Guilguer Reimberg</p>
                     <p id="statusEntregador">Jorge Tomato Silva</p>
             </section> 
             <img id="entregadorIcon" src="./imgs/icon_entregador.png" alt="">
         </section>
     </footer>
-
+    <script src="./js/javascriptMenu.js"></script>
 </body>
 </html>

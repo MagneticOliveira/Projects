@@ -32,13 +32,36 @@ public class Service {
 
 //        Another Form to return
 //        Map<String, String> data = new HashMap<>();
-//
+
 //        data.put("email", email);
 //        data.put("senha", password);
 //
 //        return ResponseEntity.ok(data);
 
             return ResponseEntity.ok(jdbcTemplate.queryForMap(sql, email, password));
+        }catch(Exception e){
+            return ResponseEntity.ok(noUser());
+        }
+    }
+
+    @GetMapping("/cadastro")
+    public ResponseEntity<?> cadastro(
+            @RequestParam int id) {
+
+        try {
+            String sql = """
+                    SELECT id, email, name, endereco, entregasAtivas, entregasFeitas, entregasSolicitadas, statusEntregaRecente, estimativaER, iconPerfil, firstName, observacao  FROM users WHERE id = ?
+                    """;
+
+//        Another Form to return
+//        Map<String, String> data = new HashMap<>();
+
+//        data.put("email", email);
+//        data.put("senha", password);
+//
+//        return ResponseEntity.ok(data);
+
+            return ResponseEntity.ok(jdbcTemplate.queryForMap(sql, id));
         }catch(Exception e){
             return ResponseEntity.ok(noUser());
         }

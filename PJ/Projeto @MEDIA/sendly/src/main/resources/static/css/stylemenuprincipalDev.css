@@ -51,6 +51,10 @@ header div{
     justify-content: flex-end;
 }
 
+#entregasAtivasDiv{
+    justify-content: flex-start;
+}
+
 img{
     align-self: center;
     border-radius: 50%;
@@ -98,7 +102,7 @@ img[src="imgs/icon_box.png"][alt="boxHero"]{
     max-width:35rem;
     width: 35dvw;
     background-color: none;
-    animation: animationu 6s infinite repeat ease-in-out;
+    animation: animationu 6s infinite ease-in-out;
 }
 
 button{
@@ -122,6 +126,11 @@ button{
     background-color: #000000;
     color: rgba(255, 255, 255, 0.8 );
     font-weight: 400;
+    transition: 0.1s;
+}
+
+#buttonsHero button:hover{
+    transform: scale(1.02);
 }
 
 #buttonsHero button:nth-child(3){
@@ -185,6 +194,6 @@ footer section p{
 
 @keyframes animationu{
 0%      {transform: translateY(0);}
-50%     {transform: translateY(16rem);}
+50%     {transform: translateY(0.3rem);}
 100%    {transform: translateY(0);}
 }
