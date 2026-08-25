@@ -77,23 +77,20 @@ form.addEventListener('submit', async (e) => {
 
     //let data = await fetch('http://172.16.0.213:8080/cadastro',{method: 'POST',body: dados});//forma rede local
     let data = await fetch('https://pwjob-production-1606.up.railway.app/cadastro',{method: 'POST', body: dados});//forma nuvem
+    
     //Passo 3
     //TRATAR API
 
     data = await data.json();
 
     //Utilização do retorno POST, inutil mas didático
-    //h1.innerHTML = data.email;
+    //h1.innerHTML = data.id;
 
     //Se Recebido ou Não, acontecem:
     
     if(data.id){
         sessionStorage.setItem('usuarioId', data.id);//Guarda o id num cookie
-        if(window.innerWidth >= 1200){
-            window.location.href = './menuprincipalDev.html'
-        }else{
-            window.location.href = './menuprincipal.html'
-        }
+        window.location.href = './menuprincipal.html'
     }else{
         p.forEach(noLogin => {
             noLogin.innerHTML = data.mensagem;
