@@ -62,7 +62,7 @@ get(`http://172.16.0.213:8080/teste`, a); */
 const form = document.querySelector('form');
 const p = document.querySelectorAll('p');
 //const h1 = document.querySelector('h1');//utilização do retorno POST inútil
-const inputs = document.querySelectorAll('input');
+
 
 //Passo 2
 //RECEBER API
@@ -97,12 +97,4 @@ form.addEventListener('submit', async (e) => {
             noLogin.style.color = "red";
         });
     };
-});
-
-inputs.forEach(input => {
-    input.addEventListener('input', ()=> {
-        p.forEach(noLogin =>{
-            noLogin.innerHTML = '';
-        });
-    });
 });

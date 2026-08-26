@@ -17,19 +17,23 @@
 
     <form action="/cadastro" method="post">
 
-        <h1>Sendly</h1>
+        <h1>Crie uma Conta</h1>
 
-        <label for="email" class="labelsAcess">Login</label>
+        <label for="email" class="labelsAcess">*Email</label>
+        <input type="email" id="email" name="email" required maxlength="50" placeholder="Email ou Telefone" autofocus>
+        <p></p>   
+
+        <label for="email" class="labelsAcess">*Email</label>
         <input type="email" id="email" name="email" required maxlength="50" placeholder="Email ou Telefone" autofocus>
         <p></p>   
         
-        <label for="password" class="labelsAcess">Senha</label>
+        <label for="password" class="labelsAcess">*Senha</label>
         <input type="password" id="password" name="password" required maxlength="50" placeholder="Password">
         <p></p>
-        <label for="esqueciSenhaA"><a href="#" id="esqueciSenhaA">esqueci a senha</a></label>
+        <label for="esqueciSenhaA"><a href="#" id="esqueciSenhaA"> </a></label>
 
-        <input type="submit" value="ENTRAR" href="./menuPrincipal.html">
-        <label for="a_criarUmaConta">Sua primeira vez aqui? <a id="a_criarUmaConta" href="./criarConta.html">Criar uma conta</a></label>
+        <input type="submit" value="CRIAR CONTA" href="./menuPrincipal.html">
+        <label for="a_criarUmaConta">Já possui uma conta? <a id="a_criarUmaConta" href="./index.html">Login</a></label>
     </form>
 
     <script src="./js/javascript.js"></script>

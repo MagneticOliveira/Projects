@@ -61,9 +61,11 @@ header div{
     transition: transform 0.3s ease-in-out;
 }
 
-/* #userBox:hover{
+/*
+#userBox:hover{
     transform: scale(1.01);
-} */
+} 
+*/
 
 #entregasAtivasDiv{
     justify-content: flex-start;
