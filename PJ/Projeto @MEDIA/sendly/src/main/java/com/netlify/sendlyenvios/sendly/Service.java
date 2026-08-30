@@ -87,7 +87,7 @@ public class Service {
 //
 //        return ResponseEntity.ok(data);
 
-            return ResponseEntity.ok(jdbcTemplate.queryForMap(sql, name, gmail, password, telefone));
+            return ResponseEntity.ok(jdbcTemplate.update(sql, name, gmail, password, telefone));
         }catch(Exception e){
             return ResponseEntity.ok(noUser());
         }
