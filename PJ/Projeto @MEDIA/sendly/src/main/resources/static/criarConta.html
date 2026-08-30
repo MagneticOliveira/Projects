@@ -16,7 +16,7 @@
         <div id="linhaD"></div>
     </header>
 
-    <form action="/cadastro" method="post">
+    <form action="/cadastroNew" method="post">
 
         <h1>Crie uma Conta</h1>
 
@@ -30,39 +30,7 @@
         <input type="password" id="password" name="password" required maxlength="50" placeholder="Digite aqui sua senha. Ex: senha#123">
 
         <label for="telefone" class="labelsAcess">*Telefone</label>
-        <input type="tel" id="telefone" name="telefone" required maxlength="11" placeholder="Digite aqui seu telefone. Ex: 11976159640">
-
-        <label for="cep" class="labelsAcess">CEP</label>
-        <input type="text" id="cep" name="cep" required maxlength="50" placeholder="Digite o CEP aqui. Ex: 04867063">
-
-        <div class="enderecoInputBox">
-            <div>
-                <label for="logradouro" class="labelsAcess">Logradouro</label>
-                <input type="text" id="logradouro" name="logradouro" maxlength="50" placeholder="Digite o logradouro aqui. Ex: Av.Santomé">
-            </div>
-            <div>
-                <label for="numero" class="labelsAcess">Número</label>
-                <input type="text" id="numero" name="numero" maxlength="50" placeholder=" n°">
-            </div>
-        </div>
-
-        <label for="complemento" class="labelsAcess">Complemento</label>
-        <input type="text" id="complemento" name="complemento" maxlength="50" placeholder="Digite o complemento aqui. Ex: Apartamento 34">
-
-        <label for="bairro" class="labelsAcess">Bairro</label>
-        <input type="text" id="bairro" name="bairro" maxlength="50" placeholder="Digite o bairro aqui. Ex: Jardim Santa Tereza" >
-
-
-        <div class="lastInputAcess">
-            <div>
-                <label for="uf" class="labelsAcess">Estado</label>
-                <input type="text" id="uf" name="uf" maxlength="50" placeholder="Estado. Ex: São Paulo" >
-            </div>
-            <div>
-                <label for="localidade" class="labelsAcess">Cidade</label>
-                <input type="text" id="localidade" name="localidade" maxlength="50" placeholder="Cidade. Ex: Jundiaí" >
-            </div>
-        </div>
+        <input type="tel" id="telefone"  class="lastInputAcess" name="telefone" required maxlength="11" placeholder="Digite aqui seu telefone. Ex: 11976159640">
 
         <input type="submit" value="CRIAR CONTA" href="./index.html">
         <label for="a_criarUmaConta">Já possui uma conta? <a id="a_criarUmaConta" href="./index.html">Login</a></label>

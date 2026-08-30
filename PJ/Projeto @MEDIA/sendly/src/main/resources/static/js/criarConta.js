@@ -23,15 +23,3 @@ form.addEventListener('submit', async (e) => {
     };
 });
 
-if(bodyH.scrollHeight > window.innerHeight && window.innerWidth > 768){
-    bodyH.style.marginTop = '18.1rem';
-    bodyH.style.marginBottom = '18.1rem';
-}else{
-    header.outerHTML = `
-    
-        <img src="imgs/icon_entregador.png" alt="icon_entregador">
-        <div id="linha"></div>
-    
-    `;
-    bodyH.style.marginBottom = '3rem';
-};

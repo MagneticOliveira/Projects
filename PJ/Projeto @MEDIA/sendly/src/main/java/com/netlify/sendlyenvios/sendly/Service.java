@@ -67,6 +67,32 @@ public class Service {
         }
     }
 
+    @PostMapping("/cadastroNew")
+    public ResponseEntity<?> cadastroNew(
+            @RequestParam String gmail,
+            @RequestParam String password,
+            @RequestParam String name,
+            @RequestParam String endereco) {
+
+        try {
+            String sql = """
+                    INSERT INTO users(name, gmail, password, endereco) VALUES(?,?,?,?,?) name = ?, endereco = ?, CEPFROM users WHERE id = ?
+                    """;
+
+//        Another Form to return
+//        Map<String, String> data = new HashMap<>();
+
+//        data.put("email", email);
+//        data.put("senha", password);
+//
+//        return ResponseEntity.ok(data);
+
+            return ResponseEntity.ok(jdbcTemplate.queryForMap(sql, name,gmail, password, endereco));
+        }catch(Exception e){
+            return ResponseEntity.ok(noUser());
+        }
+    }
+
     @GetMapping("/teste")
     public ResponseEntity<?> Batata(
             //@RequestParam String email //Vira @GetMapping(/teste?email=teste@gmail.com)

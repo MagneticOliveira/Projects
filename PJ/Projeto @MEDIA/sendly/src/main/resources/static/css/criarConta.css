@@ -12,6 +12,7 @@ body{
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-bottom: 3rem;
 }
 
 img{
@@ -257,9 +258,9 @@ input[type="submit"]:hover{
         width: 0.5px;
         border-radius: 25px;
         background-color: black;
-        top: 55.1%;
+        top: 54.5%;
         transform: translateY(-60%);
-        left: 50.99%;
+        left: 49%;
     }
 
 }
