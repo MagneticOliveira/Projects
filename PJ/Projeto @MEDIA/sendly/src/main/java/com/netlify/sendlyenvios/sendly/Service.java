@@ -72,11 +72,11 @@ public class Service {
             @RequestParam String gmail,
             @RequestParam String password,
             @RequestParam String name,
-            @RequestParam String endereco) {
+            @RequestParam String telefone) {
 
         try {
             String sql = """
-                    INSERT INTO users(name, gmail, password, endereco) VALUES(?,?,?,?,?) name = ?, endereco = ?, CEPFROM users WHERE id = ?
+                    INSERT INTO users(name, gmail, password, telefone) VALUES(?,?,?,?,?);
                     """;
 
 //        Another Form to return
@@ -87,7 +87,7 @@ public class Service {
 //
 //        return ResponseEntity.ok(data);
 
-            return ResponseEntity.ok(jdbcTemplate.queryForMap(sql, name,gmail, password, endereco));
+            return ResponseEntity.ok(jdbcTemplate.queryForMap(sql, name, gmail, password, telefone));
         }catch(Exception e){
             return ResponseEntity.ok(noUser());
         }

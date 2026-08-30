@@ -15,12 +15,17 @@ body{
     margin-bottom: 3rem;
 }
 
+header{
+    display: flex;
+    justify-content: center;
+}
+
 img{
     margin-top: 2.75rem;
     margin-bottom: 2rem;
     cursor: pointer;
     height: auto;
-    width: 44%;
+    width: 79%;
 }
 
 h1{
