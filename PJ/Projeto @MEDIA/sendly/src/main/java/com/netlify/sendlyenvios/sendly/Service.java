@@ -76,7 +76,7 @@ public class Service {
 
         try {
             String sql = """
-                    INSERT INTO users(name, gmail, password, telefone) VALUES(?,?,?,?);
+                    INSERT INTO users(name, email, password, telefone) VALUES(?,?,?,?);
                     """;
 
 //        Another Form to return
