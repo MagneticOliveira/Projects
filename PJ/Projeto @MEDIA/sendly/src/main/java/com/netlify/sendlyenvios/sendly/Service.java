@@ -69,7 +69,7 @@ public class Service {
 
     @PostMapping("/cadastroNew")
     public ResponseEntity<?> cadastroNew(
-            @RequestParam String gmail,
+            @RequestParam String email,
             @RequestParam String password,
             @RequestParam String name,
             @RequestParam String telefone) {
@@ -87,7 +87,7 @@ public class Service {
 //
 //        return ResponseEntity.ok(data);
 
-            return ResponseEntity.ok(jdbcTemplate.update(sql, name, gmail, password, telefone));
+            return ResponseEntity.ok(jdbcTemplate.update(sql, name, email, password, telefone));
         }catch(Exception e){
             return ResponseEntity.ok(noUser());
         }
