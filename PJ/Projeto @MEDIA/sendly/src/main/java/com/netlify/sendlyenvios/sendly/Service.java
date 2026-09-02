@@ -3,23 +3,24 @@ package com.netlify.sendlyenvios.sendly;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.UUID;
+
+import static com.netlify.sendlyenvios.sendly.Controller.*;
 
 @RestController
 @CrossOrigin("*")
 public class Service {
+
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
-    public static Object noUser(){
-        Map<String, String> user = new HashMap<>();
-        user.put("mensagem", "usuário ou senha incorretos");
+    @Autowired
+    private JavaMailSender mailSender;
 
-        return user;
-    }
     @PostMapping("/cadastro")
     public ResponseEntity<?> cadastro(
             @RequestParam String email,
@@ -29,14 +30,6 @@ public class Service {
             String sql = """
                     SELECT id, email FROM users WHERE email = ? AND password = ?
                     """;
-
-//        Another Form to return
-//        Map<String, String> data = new HashMap<>();
-
-//        data.put("email", email);
-//        data.put("senha", password);
-//
-//        return ResponseEntity.ok(data);
 
             return ResponseEntity.ok(jdbcTemplate.queryForMap(sql, email, password));
         }catch(Exception e){
@@ -52,14 +45,6 @@ public class Service {
             String sql = """
                     SELECT id, name, endereco, entregasAtivas, entregasFeitas, entregasSolicitadas, statusEntregaRecente, estimativaER, iconPerfil, firstName, observacao  FROM users WHERE id = ?
                     """;
-
-//        Another Form to return
-//        Map<String, String> data = new HashMap<>();
-
-//        data.put("email", email);
-//        data.put("senha", password);
-//
-//        return ResponseEntity.ok(data);
 
             return ResponseEntity.ok(jdbcTemplate.queryForMap(sql, id));
         }catch(Exception e){
@@ -79,23 +64,26 @@ public class Service {
                     INSERT INTO users(name, email, password, telefone) VALUES(?,?,?,?)
                     """;
 
-//        Another Form to return
-//        Map<String, String> data = new HashMap<>();
-
-//        data.put("email", email);
-//        data.put("senha", password);
-//
-//        return ResponseEntity.ok(data);
-
             return ResponseEntity.ok(jdbcTemplate.update(sql, name, email, password, telefone));
         }catch(Exception e){
             return ResponseEntity.ok(noUser());
         }
     }
 
+    @PostMapping("/cadastroUpdate")
+    public ResponseEntity<?> cadastroUpdate(
+            @RequestParam String email) {
+
+        String token = UUID.randomUUID().toString();
+
+        mailSender.send(enviarEmail(email, token));
+        return ResponseEntity.ok("E-mail para recuperação enviado");
+    }
+
+
     @GetMapping("/teste")
     public ResponseEntity<?> Batata(
-            //@RequestParam String email //Vira @GetMapping(/teste?email=teste@gmail.com)
+        //@RequestParam String email //Vira @GetMapping(/teste?email=teste@gmail.com)
     ){
         //com @ResquestParam para ?
         String sql = """
