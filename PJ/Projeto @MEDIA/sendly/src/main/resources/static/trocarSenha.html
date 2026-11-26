@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="./imgs/icon_box.png">
+    <link rel="stylesheet" href="./css/conta.css">
+    <title>Sendly</title>
+</head>
+
+<body>
+
+    <header>
+        <a id="logo" href="./index.html"><img id="imgD" src="imgs/icon_entregador.png" alt="icon_entregador"></a>
+        <div id="linhaD"></div>
+    </header>
+
+    <form action="/cadastroUpdate3" method="POST">
+        <label for="password" class="labelsAcess">Nova Senha</label>
+        <input type="password" id="password" name="password" required maxlength="50" placeholder="Digite aqui sua senha. Ex: Senha#123"><br>
+        <p>1.Mais de 8 caracteres.</p>
+        <p>2.Deve conter caractere especial *&$%#¨@!. </p>
+        <p>3.Letras maiúsculas e minúsculas.</p>
+        <p>4.Não deve ser a mesma de antes.</p>
+        <p id="errorP"></p>
+
+        <input type="submit" value="TROCAR SENHA" href="#">
+    </form>
+
+    <script src="./js/trocarSenha.js"></script>
+</body>
+</html>

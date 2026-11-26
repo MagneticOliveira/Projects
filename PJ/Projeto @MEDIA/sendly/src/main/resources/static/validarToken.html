@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="./imgs/icon_box.png">
+    <link rel="stylesheet" href="./css/conta.css">
+    <title>Sendly</title>
+</head>
+
+<body>
+
+    <header>
+        <a id="logo" href="./index.html"><img id="imgD" src="imgs/icon_entregador.png" alt="icon_entregador"></a>
+        <div id="linhaD"></div>
+    </header>
+
+    <form action="/cadastroUpdate2" method="GET">
+        <h1>E-mail de recuperação</h1>
+
+        <p>Vamos enviar um código em seu gmail para que valide e altere sua senha: </p><br>
+        <p>1.Digite seu gmail. </p>
+        <p>2.Clique em ENVIAR.</p>
+        <p>3.Acesse seu gmail.</p>
+        <p>4.Digite aqui o código recebido.</p>
+        <p>5.Clique em VALIDAR.</p>
+        <label for="token" class="labelsAcess">Validar Token</label>
+        <input type="text" class="lastInputAcess" id="token" name="token" required maxlength="255" placeholder="Digite aqui seu token" autofocus>
+        <p id="errorP"></p>
+
+        <input type="submit" value="VALIDAR" href="#">
+        <label for="a_criarUmaConta">Não recebeu? <a id="a_criarUmaConta" href="./index.html">Reenviar token</a>.</label>
+    </form>
+
+    <script src="./js/validarToken.js"></script>
+</body>
+</html>

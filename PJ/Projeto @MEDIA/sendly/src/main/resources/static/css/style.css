@@ -8,6 +8,10 @@
     box-sizing: border-box;
 }
 
+:root {
+    color-scheme: light;
+}
+
 body{
     display: flex;
     flex-direction: column;
@@ -113,6 +117,12 @@ input[type="submit"]:hover{
     transition: 0.1s;
 }
 
+#logo{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 
 @media(min-width:768px) and (orientation: portrait){
 
@@ -140,7 +150,6 @@ input[type="submit"]:hover{
 
     img{
         width: 22%;
-        height: fit-content;
         
     }
 
@@ -177,8 +186,6 @@ input[type="submit"]:hover{
 
     img{
         width: 22%;
-        height: fit-content;
-        
     }
 
     input[type="submit"]{

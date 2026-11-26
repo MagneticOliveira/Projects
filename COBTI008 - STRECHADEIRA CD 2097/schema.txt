@@ -1,0 +1,90 @@
+-- ==========================================================
+-- SCRIPT DE CRIAÇÃO DAS TABELAS - PAINEL STRETCHADEIRAS CD 2097
+-- Banco de Dados: MySQL
+-- ==========================================================
+
+--0. TABELA USERS
+
+DROP TABLE IF EXISTS users;
+
+CREATE TABLE users (
+    id INT NOT NULL AUTO_INCREMENT,
+    email VARCHAR(100) NOT NULL,
+    password VARCHAR(100) NOT NULL,
+    destino VARCHAR(120),
+    firstName VARCHAR(50),
+    statusEntregaRecente VARCHAR(30),
+    observacao VARCHAR(30),
+    estimativaER VARCHAR(30),
+    name VARCHAR(150),
+    endereco VARCHAR(150),
+    entregasAtivas INT,
+    entregasFeitas INT,
+    entregasSolicitadas INT,
+    iconPerfil VARCHAR(255),
+    telefone VARCHAR(11),
+
+    PRIMARY KEY (id)
+) ENGINE=InnoDB
+  DEFAULT CHARSET=utf8mb4
+  AUTO_INCREMENT=5;
+
+
+-- 1. TABELA DE FILIAIS
+CREATE TABLE IF NOT EXISTS `filiais` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `codigo` VARCHAR(20) NOT NULL,
+  `nome` VARCHAR(150) NOT NULL,
+  `cidade` VARCHAR(100) DEFAULT NULL,
+  `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `uk_filial_codigo` (`codigo`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- 2. TABELA DE BOXES
+CREATE TABLE IF NOT EXISTS `boxes` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `nome` VARCHAR(100) NOT NULL,
+  `descricao` VARCHAR(255) DEFAULT NULL,
+  `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- 3. TABELA DE STRETCHADEIRAS
+-- Separação conceitual estrita:
+--  `ativo`: 1 = ATIVA, 0 = INATIVA (habilitação da máquina no sistema)
+--  `status_operacional`: 'LIVRE' ou 'OCUPADA' (estado do processamento)
+--  Quando LIVRE, filial_id e box_id são NULL.
+--  Quando OCUPADA, filial_id e box_id apontam para os registros correspondentes.
+CREATE TABLE IF NOT EXISTS `stretchadeiras` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `nome` VARCHAR(100) NOT NULL,
+  `descricao` VARCHAR(255) DEFAULT NULL,
+  `ativo` TINYINT(1) NOT NULL DEFAULT 1,
+  `status_operacional` VARCHAR(20) NOT NULL DEFAULT 'LIVRE',
+  `filial_id` INT DEFAULT NULL,
+  `box_id` INT DEFAULT NULL,
+  `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  CONSTRAINT `fk_stretchadeira_filial` FOREIGN KEY (`filial_id`) REFERENCES `filiais`(`id`) ON DELETE SET NULL,
+  CONSTRAINT `fk_stretchadeira_box` FOREIGN KEY (`box_id`) REFERENCES `boxes`(`id`) ON DELETE SET NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- Carga inicial opcional de teste (caso as tabelas estejam vazias)
+-- INSERT IGNORE INTO `filiais` (`codigo`, `nome`, `cidade`) VALUES
+--   ('F01', 'Cobasi Morumbi', 'São Paulo'),
+--   ('F02', 'Cobasi Villa Lobos', 'São Paulo'),
+--   ('F03', 'Cobasi Campinas', 'Campinas');
+
+-- INSERT IGNORE INTO `boxes` (`nome`, `descricao`) VALUES
+--   ('BOX 01', 'Expedição Linha Sul'),
+--   ('BOX 02', 'Expedição Interior'),
+--   ('BOX 03', 'Expedição Linha Norte');
+
+-- INSERT IGNORE INTO `stretchadeiras` (`nome`, `descricao`, `ativo`, `status_operacional`, `filial_id`, `box_id`) VALUES
+--   ('Stretchadeira 01', 'Linha de Entrada A', 1, 'LIVRE', NULL, NULL),
+--   ('Stretchadeira 02', 'Linha de Entrada B', 1, 'OCUPADA', 1, 1),
+--   ('Stretchadeira 03', 'Linha de Reserva', 0, 'LIVRE', NULL, NULL);

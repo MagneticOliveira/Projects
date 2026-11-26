@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="https://play-lh.googleusercontent.com/-BnkaUGEENV4Es-ODp3fxpogBD0TRXCe7_swJBdgKBKH3gx0y2vcdZHVI_ETbx6XD9c">
+    <link rel="stylesheet" href="./css/conta.css">
+    <title>STRECHADEIRA CD 2097</title>
+</head>
+
+<body>
+
+    <section id="CirculosSection">
+        <div class="conjunto conj1">
+            <div class="circle circle1"></div>
+            <div class="circle circle2"></div>
+            <div class="circle circle3"></div>
+            <div class="circle circle4"></div>
+        </div>
+
+        <div class="conjunto conj2">
+            <div class="circle circle1"></div>
+            <div class="circle circle2"></div>
+            <div class="circle circle3"></div>
+            <div class="circle circle4"></div>
+            <div class="circle circle5"></div>
+        </div>
+    </section>
+
+    <header>
+        <a id="logo" href="./index.html"><img id="imgD" src="imgs/cobasi-logo.png" alt="icon_entregador"></a>
+        <div id="linhaD"></div>
+    </header>
+
+    <form action="/cadastroUpdate" method="post">
+
+        <h1>E-mail de recuperação</h1>
+
+        <p>Vamos enviar um código em seu gmail para que valide e altere sua senha: </p><br>
+        <p>1.Digite seu gmail. </p>
+        <p>2.Clique em ENVIAR.</p>
+        <p>3.Acesse seu gmail.</p>
+        <p>4.Digite aqui o código recebido.</p>
+        <p>5.Clique em VALIDAR.</p>
+        <label for="email" class="labelsAcess">Email</label>
+        <input type="email" class="lastInputAcess" id="email" name="email" required maxlength="50" placeholder="Digite aqui seu Email. Ex: nome@gmail.com" autofocus>
+        <p id="errorP"></p>
+
+        <input type="submit" value="ENVIAR" href="#">
+        <label for="a_criarUmaConta">Tentar logar novamente? <a id="a_criarUmaConta" href="./index.html">Login</a></label>
+    </form>
+
+    <script src="./js/esqueciSenha.js"></script>
+</body>
+</html>

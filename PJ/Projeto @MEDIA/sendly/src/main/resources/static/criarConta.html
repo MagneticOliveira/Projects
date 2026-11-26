@@ -5,20 +5,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="./imgs/icon_box.png">
-    <link rel="stylesheet" href="./css/criarConta.css">
+    <link rel="stylesheet" href="./css/conta.css">
     <title>Sendly</title>
 </head>
 
 <body>
 
     <header>
-        <img id="imgD" src="imgs/icon_entregador.png" alt="icon_entregador">
+        <a id="logo" href="./index.html"><img id="imgD" src="imgs/icon_entregador.png" alt="icon_entregador"></a>
         <div id="linhaD"></div>
     </header>
 
     <form action="/cadastroNew" method="post">
 
-        <h1>Crie uma Conta</h1>
+        <h1>Crie uma conta</h1>
 
         <label for="name" class="labelsAcess">*Nome Completo</label>
         <input type="text" id="name" name="name" required maxlength="50" placeholder="Digite aqui o seu Nome completo" autofocus>
@@ -27,7 +27,7 @@
         <input type="email" id="email" name="email" required maxlength="50" placeholder="Digite aqui seu Email. Ex: nome@gmail.com">
         
         <label for="password" class="labelsAcess">*Senha</label>
-        <input type="password" id="password" name="password" required maxlength="50" placeholder="Digite aqui sua senha. Ex: senha#123">
+        <input type="password" id="password" name="password" required maxlength="50" placeholder="Digite aqui sua senha. Ex: Senha#123">
 
         <label for="telefone" class="labelsAcess">*Telefone</label>
         <input type="tel" id="telefone"  class="lastInputAcess" name="telefone" required maxlength="11" placeholder="Digite aqui seu telefone. Ex: 11976159640">

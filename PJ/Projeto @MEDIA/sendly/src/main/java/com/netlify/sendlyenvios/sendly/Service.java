@@ -1,12 +1,13 @@
 package com.netlify.sendlyenvios.sendly;
 
+import com.resend.core.exception.ResendException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.mail.SimpleMailMessage;
-import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import java.util.Map;
 import java.util.UUID;
 
 import static com.netlify.sendlyenvios.sendly.Controller.*;
@@ -18,21 +19,25 @@ public class Service {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
-    @Autowired
-    private JavaMailSender mailSender;
-
     @PostMapping("/cadastro")
     public ResponseEntity<?> cadastro(
             @RequestParam String email,
             @RequestParam String password) {
 
         try {
-            String sql = """
-                    SELECT id, email FROM users WHERE email = ? AND password = ?
-                    """;
+            BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
-            return ResponseEntity.ok(jdbcTemplate.queryForMap(sql, email, password));
-        }catch(Exception e){
+            String sql = """
+                    SELECT id, email, password FROM users
+                    WHERE email = ?
+                    """;
+            Map<String, Object> user = jdbcTemplate.queryForMap(sql, email);
+            if (encoder.matches(password, (String) user.get("password"))) {
+                user.remove("password");
+                return ResponseEntity.ok(user);
+            }
+            return ResponseEntity.ok(noUser());
+        } catch (Exception e) {
             return ResponseEntity.ok(noUser());
         }
     }
@@ -47,7 +52,7 @@ public class Service {
                     """;
 
             return ResponseEntity.ok(jdbcTemplate.queryForMap(sql, id));
-        }catch(Exception e){
+        } catch (Exception e) {
             return ResponseEntity.ok(noUser());
         }
     }
@@ -60,39 +65,72 @@ public class Service {
             @RequestParam String telefone) {
 
         try {
+            BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+            String passwordHash = encoder.encode(password);
+
             String sql = """
                     INSERT INTO users(name, email, password, telefone) VALUES(?,?,?,?)
                     """;
 
-            return ResponseEntity.ok(jdbcTemplate.update(sql, name, email, password, telefone));
-        }catch(Exception e){
-            return ResponseEntity.ok(noUser());
+
+            return ResponseEntity.ok(jdbcTemplate.update(sql, name, email, passwordHash, telefone));
+        } catch (Exception e) {
+            return ResponseEntity.status(500).body("Erro ao criar usuário: " + e.getMessage());
         }
     }
 
     @PostMapping("/cadastroUpdate")
     public ResponseEntity<?> cadastroUpdate(
             @RequestParam String email) {
+        try {
+            String sql = """
+                    SELECT id FROM users WHERE email = ?
+                    """;
+            jdbcTemplate.queryForMap(sql, email);
 
-        String token = UUID.randomUUID().toString();
-
-        mailSender.send(enviarEmail(email, token));
-        return ResponseEntity.ok("E-mail para recuperação enviado");
+            try{
+                String token = UUID.randomUUID().toString();
+                sql = """
+                    UPDATE users SET token = ? WHERE email = ?
+                    """;
+                jdbcTemplate.update(sql, token, email);
+                enviarEmail(email, token);
+                return ResponseEntity.ok("index");
+            } catch (ResendException e) {
+                return ResponseEntity.status(500).body("Erro ao enviar email" + e.getMessage());
+            }
+        }catch (Exception e) {
+            return ResponseEntity.status(400).body("Gmail inválido");
+        }
     }
 
+    @GetMapping("/cadastroUpdate2")
+    public ResponseEntity<?> cadastroUpdate2(
+            @RequestParam String token) {
+        try {
+            String sql = """
+                    SELECT id FROM users WHERE token = ?
+                    """;
+            return ResponseEntity.ok(jdbcTemplate.queryForMap(sql, token));
+        } catch (Exception e) {
+            return ResponseEntity.status(400).body("Token inválido");
+        }
+    }
 
-    @GetMapping("/teste")
-    public ResponseEntity<?> Batata(
-        //@RequestParam String email //Vira @GetMapping(/teste?email=teste@gmail.com)
-    ){
-        //com @ResquestParam para ?
-        String sql = """
-                SELECT email FROM users WHERE email = ?
-                """;
+    @PostMapping("/cadastroUpdate3")
+    public ResponseEntity<?> cadastroUpdate3(
+            @RequestParam String token,
+            @RequestParam String password) {
+        try {
+            BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+            String passwordHash = encoder.encode(password);
 
-        String sql2 = """
-                SELECT email FROM users WHERE id = 2
-                """;
-        return ResponseEntity.ok(jdbcTemplate.queryForObject(sql2, String.class));//, email));
+            String sql = """
+                    UPDATE users SET password = ?, token = NULL WHERE token = ?
+                    """;
+            return ResponseEntity.ok(jdbcTemplate.update(sql, passwordHash, token));
+        } catch (Exception e) {
+            return ResponseEntity.status(400).body("Token inválido");
+        }
     }
 }
